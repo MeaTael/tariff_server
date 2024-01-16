@@ -31,3 +31,8 @@ def orders_list(request):
     data = Order.objects.all()
     serialzier = OrderSerializer(data, context={'request': request}, many=True)
     return Response(serialzier.data)
+
+@api_view(['DELETE'])
+def clear(request):
+    Order.objects.all().delete()
+    return Response(status=status.HTTP_200_OK)
